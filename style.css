@@ -2,17 +2,21 @@ html{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.header{
+.header {
     display: flex;
     gap: 64px;
     position: fixed;
-    background-color: black;
+    background-color: #333; 
+    color: white;
     align-items: center;
     justify-content: center;
     width: 100vw;
     height: 64px;
     top: 0px;
     margin: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-bottom: 2px solid #444;
+    transition: background-color 0.3s ease; 
 }
 
 body{
@@ -44,5 +48,8 @@ a{
     color: white;
 }
 
+.Titre_temp{
+    margin-top: 100px;
+}
 
 
