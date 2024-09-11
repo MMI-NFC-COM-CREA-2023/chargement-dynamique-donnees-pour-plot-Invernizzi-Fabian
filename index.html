@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,29 +12,66 @@
         <ul class="header">
             <li><a href="#header">Haut de page</a></li>
             <li><a href="#sp1">les Pingouins</a></li>
-            <li><a href="#sp2">Les Diamants</a></li>
+            <li><a href="#sp2">Les Températures</a></li>
         </ul>
     </header>
     <main>
         <h2 id="sp1">Les Pingouins</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Les pingouins sont des oiseaux marins fascinants, principalement connus pour leur capacité à nager avec agilité et à survivre dans des environnements extrêmes. L'une des façons les plus intéressantes de les étudier est d'examiner leurs caractéristiques physiques, telles que la profondeur du bec et la masse corporelle. Ces données permettent de mieux comprendre les variations entre différentes espèces et comment elles s'adaptent à leur environnement. Le graphique ci-dessous montre la corrélation entre la profondeur du bec et la masse corporelle des pingouins, mettant en lumière ces différences morphologiques.</p>
         <figure>
             <div id="graph1" class="graph"></div>
             <figcaption></figcaption>
         </figure>
 
-        <h2 id="sp2">Les Diamants</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <h2 id="sp2">Les températures</h2>
+        <p>Les diamants, souvent prisés pour leur rareté et leur éclat, sont évalués selon plusieurs critères, notamment leur taille, leur pureté, leur couleur et leur poids (en carats). L'évaluation précise de ces caractéristiques est essentielle pour déterminer la qualité et la valeur de chaque pierre précieuse. Le graphique ci-dessous montre la relation entre le poids en carats des diamants et leur prix, ainsi que la manière dont d'autres facteurs, comme la clarté, influencent cette relation.</p>
         <figure>
             <div id="graph2" class="graph"></div>
             <figcaption></figcaption>
         </figure>
     </main>
 
-    <script>
+    <script type="module">
+        import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
 
+
+        //graph1
+        const diamondsResponse = await fetch("diamonds.json");
+        const diamonds = await diamondsResponse.json();
+
+        const plot2 = Plot.plot({
+            color: { legend: true },
+            marks: [
+                Plot.dot(diamonds, { x: "carat", y: "price", fill: "carat", tip: true })
+            ]
+        })
+        const div2 = document.querySelector("#graph1");
+        div2.append(plot2)
+   
         
+        //graph2
+        const penguinsResponse = await fetch("penguins.json");
+        const penguins = await penguinsResponse.json();
+
+        const plot = Plot.plot({
+            color: { legend: true },
+            x: {},
+            y: { grid: true },
+            marks: [
+                Plot.dot(penguins, {
+                    x: "culmen_depth_mm",
+                    y: "body_mass_g",
+                    stroke: "body_mass_g",
+                    tip: true
+                })
+            ]
+        })
+        const div = document.querySelector("#graph2");
+        div.append(plot);
+
     </script>
+
+
 </body>
 
 </html>
