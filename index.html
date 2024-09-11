@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,10 +32,11 @@
         </figure>
     </main>
 
-    <script type="module">
-        import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
+    <script>
 
-
+        async function faitAsync() {
+            
+        
         //graph1
         const diamondsResponse = await fetch("diamonds.json");
         const diamonds = await diamondsResponse.json();
@@ -47,9 +49,14 @@
         })
         const div2 = document.querySelector("#graph1");
         div2.append(plot2)
-   
+        }
+
+        faitAsync();
+
+        async function faitAsync2() {
         
-        //graph2
+        
+            //graph2
         const penguinsResponse = await fetch("penguins.json");
         const penguins = await penguinsResponse.json();
 
@@ -68,7 +75,8 @@
         })
         const div = document.querySelector("#graph2");
         div.append(plot);
-
+    }
+    faitAsync2();
     </script>
 
 
